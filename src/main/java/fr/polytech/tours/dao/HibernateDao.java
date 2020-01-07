@@ -1,26 +1,35 @@
 package fr.polytech.tours.dao;
 
+import fr.polytech.tours.model.Versionable;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 
-public class HibernateDao<T> implements IDao<T> {
+import java.io.Serializable;
+
+public class HibernateDao<Id extends Serializable, V extends Versionable<Id>> implements IDao<Id, V> {
 
     private Session hibernateSession;
-    private Class<T> persistentClass;
+    private Class<V> persistentClass;
 
-    public HibernateDao(Session session) {
+    public HibernateDao(Session session, Class<V> persistentClass) {
         this.hibernateSession = session;
+        this.persistentClass = persistentClass;
     }
 
-    public void save(T o) {
+    public void save(V o) {
         hibernateSession.saveOrUpdate(o);
     }
 
-    public T read(Integer id) {
-        T res = hibernateSession.get(this.persistentClass, id);
+    public V get(Id id) {
+        V res = hibernateSession.get(this.persistentClass, id);
         if (res == null) {
             throw new ObjectNotFoundException(persistentClass, id.toString());
         }
         return res;
+    }
+
+    @Override
+    public Class<V> getPersistanceClazz() {
+        return persistentClass;
     }
 }

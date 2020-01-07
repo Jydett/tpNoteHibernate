@@ -1,4 +1,11 @@
 package fr.polytech.tours.dao;
 
-public interface IDao<T> {
+import fr.polytech.tours.model.Versionable;
+
+import java.io.Serializable;
+
+public interface IDao<Id extends Serializable, T extends Versionable<Id>> {
+    Class<T> getPersistanceClazz();
+
+    T get(Id id);
 }

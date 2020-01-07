@@ -1,5 +1,8 @@
 package fr.polytech.tours.dao;
 
+import fr.polytech.tours.model.Versionable;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,11 +23,11 @@ public class DaoRegistery {
         registery = new HashMap<>();
     }
 
-    public <T> void register(Class<T> clazz, IDao<T> dao) {
-        registery.put(clazz.getName(), dao);
+    public <Id extends Serializable, V extends Versionable<Id>> void register(IDao<Id, V> dao) {
+        registery.put(dao.getPersistanceClazz().getName(), dao);
     }
 
-    public <T> IDao<T> get(Class<T> clazz) {
+    public <Id extends Serializable, V extends Versionable<Id>> IDao<Id, V> get(Class<V> clazz) {
         return registery.get(clazz.getName());
     }
 }
