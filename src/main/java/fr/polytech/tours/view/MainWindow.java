@@ -1,5 +1,9 @@
 package fr.polytech.tours.view;
 
+import fr.polytech.tours.model.Clap;
+import fr.polytech.tours.model.Scene;
+import fr.polytech.tours.model.Setup;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,9 +13,9 @@ public class MainWindow extends JFrame {
     private JLabel movieTitle;
     private JPanel panelTitle;
 
-    private ElementWindow scene;
-    private ElementWindow setup;
-    private ElementWindow clap;
+    private ElementWindow<Scene> scene;
+    private ElementWindow<Setup> setup;
+    private ElementWindow<Clap> clap;
 
     private InformationWindow sceneInfo;
     private InformationWindow setupInfo;
@@ -33,12 +37,16 @@ public class MainWindow extends JFrame {
         panelTitle.add(movieTitle);
         this.add(panelTitle, BorderLayout.NORTH);
 
-        scene = new ElementWindow();
-        setup = new ElementWindow();
-        clap = new ElementWindow();
+        scene = new ElementWindow<>();
+        setup = new ElementWindow<>();
+        clap = new ElementWindow<>();
         sceneInfo = new InformationWindow();
         setupInfo = new InformationWindow();
         clapInfo = new InformationWindow();
+
+        scene.add(sceneInfo);
+        setup.add(setupInfo);
+        clap.add(clapInfo);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1,3, 10, 0));
