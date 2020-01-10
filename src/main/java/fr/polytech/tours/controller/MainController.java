@@ -6,5 +6,6 @@ public class MainController {
 
     public static void main(String[] args) {
         DaoConfiguration daoConfiguration = new DaoConfiguration();
+        FilmController filmController = new FilmController();
     }
 }

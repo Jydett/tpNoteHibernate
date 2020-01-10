@@ -9,7 +9,7 @@ public class MainWindow extends JFrame {
     private JLabel movieTitle;
     private JPanel panelTitle;
 
-    private MainWindow () {
+    public MainWindow () {
 
         this.setVisible(true);
         this.setLayout(new BorderLayout());
@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         appTitle = new JLabel("FILMATOR");
-        movieTitle = new JLabel("Ninja hilter contre les dinosaure de l'espace");
+        movieTitle = new JLabel("Ninja hilter contre les dinosaures de l'espace");
 
         panelTitle = new JPanel();
         panelTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 5));
@@ -38,11 +38,4 @@ public class MainWindow extends JFrame {
 
         this.add(panel, BorderLayout.CENTER);
     }
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new MainWindow());
-
-    }
-
 }
