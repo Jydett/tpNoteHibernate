@@ -9,6 +9,14 @@ public class MainWindow extends JFrame {
     private JLabel movieTitle;
     private JPanel panelTitle;
 
+    private ElementWindow scene;
+    private ElementWindow setup;
+    private ElementWindow clap;
+
+    private InformationWindow sceneInfo;
+    private InformationWindow setupInfo;
+    private InformationWindow clapInfo;
+
     public MainWindow () {
 
         this.setVisible(true);
@@ -25,9 +33,12 @@ public class MainWindow extends JFrame {
         panelTitle.add(movieTitle);
         this.add(panelTitle, BorderLayout.NORTH);
 
-        ElementWindow scene = new ElementWindow();
-        ElementWindow setup = new ElementWindow();
-        ElementWindow clap = new ElementWindow();
+        scene = new ElementWindow();
+        setup = new ElementWindow();
+        clap = new ElementWindow();
+        sceneInfo = new InformationWindow();
+        setupInfo = new InformationWindow();
+        clapInfo = new InformationWindow();
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1,3, 10, 0));
@@ -37,5 +48,17 @@ public class MainWindow extends JFrame {
         panel.add(clap);
 
         this.add(panel, BorderLayout.CENTER);
+    }
+
+    public ElementWindow getScene() {
+        return scene;
+    }
+
+    public ElementWindow getSetup() {
+        return setup;
+    }
+
+    public ElementWindow getClap() {
+        return clap;
     }
 }
