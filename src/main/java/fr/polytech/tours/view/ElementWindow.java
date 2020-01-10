@@ -3,6 +3,8 @@ package fr.polytech.tours.view;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ElementWindow<E> extends JPanel {
 
@@ -11,10 +13,9 @@ public class ElementWindow<E> extends JPanel {
     private JList<E> listItem;
     private DefaultListModel<E> listModel;
 
-
-    public ElementWindow() {
+    public ElementWindow(BiConsumer<InformationWindow<E>, E> displayer) {
         this.setLayout(new BorderLayout());
-        this.info = new InformationWindow<E>();
+        this.info = new InformationWindow<>(displayer);
 
         listModel = new DefaultListModel<>();
 
@@ -44,4 +45,7 @@ public class ElementWindow<E> extends JPanel {
         }
     }
 
+    public void addSelectionListener(Consumer<E> listener) {
+        listItem.addListSelectionListener(e -> listener.accept(listModel.getElementAt(e.getFirstIndex())));
+    }
 }
