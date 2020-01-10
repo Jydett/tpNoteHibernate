@@ -1,14 +1,20 @@
 package fr.polytech.tours.view;
 
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
-public class InformationWindow extends JPanel {
+public class InformationWindow<E> extends JPanel {
 
     private JLabel labelSelect;
     private JLabel itemSelect;
+    private BiConsumer<InformationWindow<E>, E> displayer;
 
-    public void ConstructInfo(){
+    public void ConstructInfo(BiConsumer<InformationWindow<E>, E> displayer) {
+        this.displayer = displayer;
         this.setLayout(new FlowLayout());
 
         labelSelect = new JLabel("Sélectionné : ");
@@ -18,11 +24,11 @@ public class InformationWindow extends JPanel {
         this.add(itemSelect);
     }
 
-    public void setItemSelect(String itemName) {
-        itemSelect.setText(itemName);
-    }
-
     public JLabel getItemSelect() {
         return itemSelect;
+    }
+
+    public void update(E newSelection) {
+        displayer.accept(this, newSelection);
     }
 }

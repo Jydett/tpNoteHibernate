@@ -3,6 +3,7 @@ package fr.polytech.tours.view;
 import fr.polytech.tours.model.Clap;
 import fr.polytech.tours.model.Scene;
 import fr.polytech.tours.model.Setup;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,13 +14,12 @@ public class MainWindow extends JFrame {
     private JLabel movieTitle;
     private JPanel panelTitle;
 
+    @Getter
     private ElementWindow<Scene> scene;
+    @Getter
     private ElementWindow<Setup> setup;
+    @Getter
     private ElementWindow<Clap> clap;
-
-    private InformationWindow sceneInfo;
-    private InformationWindow setupInfo;
-    private InformationWindow clapInfo;
 
     public MainWindow () {
 
@@ -40,13 +40,6 @@ public class MainWindow extends JFrame {
         scene = new ElementWindow<>();
         setup = new ElementWindow<>();
         clap = new ElementWindow<>();
-        sceneInfo = new InformationWindow();
-        setupInfo = new InformationWindow();
-        clapInfo = new InformationWindow();
-
-        scene.add(sceneInfo);
-        setup.add(setupInfo);
-        clap.add(clapInfo);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1,3, 10, 0));
@@ -56,17 +49,5 @@ public class MainWindow extends JFrame {
         panel.add(clap);
 
         this.add(panel, BorderLayout.CENTER);
-    }
-
-    public ElementWindow getScene() {
-        return scene;
-    }
-
-    public ElementWindow getSetup() {
-        return setup;
-    }
-
-    public ElementWindow getClap() {
-        return clap;
     }
 }

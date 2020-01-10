@@ -20,8 +20,8 @@ public class DaoConfiguration {
     }
 
     private void createSession() {
-        EntityManager entityManager = Persistence.createEntityManagerFactory("test").createEntityManager();
-        hibernateSession = entityManager.unwrap(Session.class);
+//        EntityManager entityManager = Persistence.createEntityManagerFactory("test").createEntityManager();
+//        hibernateSession = entityManager.unwrap(Session.class);
     }
 
     private void registerDaos() {
