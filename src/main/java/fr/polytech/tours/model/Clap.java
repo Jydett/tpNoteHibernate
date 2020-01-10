@@ -17,4 +17,9 @@ public class Clap implements Versionable<Integer> {
 
     @ManyToOne
     private Setup setup;
+
+    @Override
+    public String toString() {
+        return "id = " + id + "roll film id  = " + rollFilmId + ", time in ms : " + timeInMs;
+    }
 }

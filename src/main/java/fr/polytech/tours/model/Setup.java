@@ -19,4 +19,9 @@ public class Setup implements Versionable<Integer> {
 
     @ManyToOne
     private Scene scene;
+
+    @Override
+    public String toString() {
+        return "id = " + id + ", description : " + description;
+    }
 }

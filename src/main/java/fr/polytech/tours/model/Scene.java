@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class Scene implements Versionable<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,9 @@ public abstract class Scene implements Versionable<Integer> {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "scene")
     private List<Setup> setups;
+
+    @Override
+    public String toString() {
+        return "ID = " + id + ", description : " + description;
+    }
 }

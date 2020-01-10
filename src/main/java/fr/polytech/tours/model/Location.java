@@ -21,4 +21,9 @@ public class Location implements Versionable<Integer> {
     private int postCode;
 
     private String street;
+
+    @Override
+    public String toString() {
+        return "in " + country + ", " + city + ", " + postCode + ", " + street;
+    }
 }

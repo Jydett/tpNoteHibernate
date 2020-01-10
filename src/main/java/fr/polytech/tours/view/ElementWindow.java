@@ -39,6 +39,10 @@ public class ElementWindow<E> extends JPanel {
         listModel.remove(index);
     }
 
+    public void deleteElements(){
+        listModel.removeAllElements();
+    }
+
     public void addElements(Collection<E> collection) {
         for (E e : collection) {
             listModel.addElement(e);
@@ -46,6 +50,11 @@ public class ElementWindow<E> extends JPanel {
     }
 
     public void addSelectionListener(Consumer<E> listener) {
-        listItem.addListSelectionListener(e -> listener.accept(listModel.getElementAt(e.getFirstIndex())));
+        listItem.addListSelectionListener(e -> {
+            if (! e.getValueIsAdjusting()){
+                listener.accept(listModel.getElementAt(e.getFirstIndex()));
+            }
+        });
     }
+
 }

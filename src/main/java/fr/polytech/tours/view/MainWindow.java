@@ -28,7 +28,7 @@ public class MainWindow extends JFrame {
 
         this.setVisible(true);
         this.setLayout(new BorderLayout());
-        this.setSize(new Dimension(500, 500));
+        this.setSize(new Dimension(600, 500));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         appTitle = new JLabel("FILMATOR");
