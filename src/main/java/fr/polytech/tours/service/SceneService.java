@@ -31,7 +31,7 @@ public class SceneService {
             return interiorScene.getTheaterCode();
         } else if (scene instanceof ExteriorScene) {
             ExteriorScene exteriorScene = (ExteriorScene) scene;
-            return exteriorScene.getLocation().getId();
+            return exteriorScene.getLocation().getLocId();
         }
         throw new IllegalArgumentException("Unknown scene type !");
     }
@@ -41,7 +41,6 @@ public class SceneService {
     }
 
     public List<Scene> getAll() {
-        //TODO
         return Collections.emptyList();
     }
 }

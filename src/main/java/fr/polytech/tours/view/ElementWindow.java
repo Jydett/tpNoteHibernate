@@ -86,4 +86,8 @@ public class ElementWindow<E extends Versionable<?>> extends JPanel {
             listModel.addElement(e);
         }
     }
+
+    public E getSelected() {
+        return listItem.getSelectedValue();
+    }
 }

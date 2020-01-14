@@ -5,6 +5,7 @@ import fr.polytech.tours.dao.DaoRegistery;
 import fr.polytech.tours.dao.IDao;
 import fr.polytech.tours.model.*;
 import fr.polytech.tours.service.SceneService;
+import fr.polytech.tours.view.InformationWindow;
 import fr.polytech.tours.view.MainWindow;
 
 import javax.swing.SwingUtilities;
@@ -39,6 +40,13 @@ public class FilmController {
             public List<Versionable<?>> getChildren(Clap element) {
                 return null;
             }
+
+            @Override
+            public void displayInformation(InformationWindow<Clap> info, Clap element) {
+                info.updateField("id", Integer.toString(element.getId()));
+                info.updateField("id de bobine", Integer.toString(element.getRollFilmId()));
+                info.updateField("temps (ms)", Long.toString(element.getTimeInMs()));
+            }
         };
         view.addElementColumn(clapElement.getView());
 
@@ -46,6 +54,12 @@ public class FilmController {
             @Override
             public List<Clap> getChildren(Setup element) {
                 return element.getClaps();
+            }
+
+            @Override
+            public void displayInformation(InformationWindow<Setup> info, Setup element) {
+                info.updateField("id", Integer.toString(element.getId()));
+                info.updateField("description", element.getDescription());
             }
         };
         view.addElementColumn(setupElement.getView());
@@ -55,6 +69,14 @@ public class FilmController {
             public List<Setup> getChildren(Scene element) {
                 return element.getSetups();
             }
+
+            @Override
+            public void displayInformation(InformationWindow<Scene> info, Scene element) {
+                info.updateField("id", Integer.toString(element.getId()));
+                info.updateField("description", element.getDescription());
+                info.button("Calculer le temps total ", () -> MainWindow.popup(getTotalTime(getView().getSelected())));
+                info.button("Avoir le code de la location de tournage ", () -> MainWindow.popup(getLocationCode(getView().getSelected())));
+            }
         };
         view.addElementColumn(sceneElement.getView());
 
@@ -62,6 +84,12 @@ public class FilmController {
             @Override
             public List<Scene> getChildren(Film element) {
                 return element.getScenes();
+            }
+
+            @Override
+            public void displayInformation(InformationWindow<Film> info, Film element) {
+                info.updateField("id", Integer.toString(element.getId()));
+                info.updateField("nom", element.getName());
             }
         };
         view.addElementColumn(filmController.getView());

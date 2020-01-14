@@ -19,6 +19,6 @@ public class InteriorScene extends Scene {
 
     @Override
     public String toString() {
-        return super.toString() + ", interior";
+        return super.toString() + ", interior, theaterCode:" + theaterCode;
     }
 }

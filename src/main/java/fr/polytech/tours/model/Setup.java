@@ -1,6 +1,7 @@
 package fr.polytech.tours.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,12 +13,15 @@ public class Setup implements Versionable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Setter
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "setup")
+    @Setter
     private List<Clap> claps;
 
     @ManyToOne
+    @Setter
     private Scene scene;
 
     @Override

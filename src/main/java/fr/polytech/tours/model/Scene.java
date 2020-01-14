@@ -14,9 +14,11 @@ public abstract class Scene implements Versionable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
+    @Setter
     private String description;
 
     @ManyToOne
+    @Setter
     private Film film;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "scene")

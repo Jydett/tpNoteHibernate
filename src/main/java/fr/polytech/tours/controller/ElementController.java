@@ -49,6 +49,7 @@ public abstract class ElementController<Id extends Serializable, E extends Versi
     }
 
     public void select(E element) {
+        view.getInfo().updateInfo(element);
         if (childController != null) {
             childController.removeAll();
             childController.display(getChildren(element));
@@ -64,6 +65,7 @@ public abstract class ElementController<Id extends Serializable, E extends Versi
 
     private void removeAll() {
         view.deleteElements();
+        view.getInfo().removeAll();
         if (childController != null) {
             childController.removeAll();
         }

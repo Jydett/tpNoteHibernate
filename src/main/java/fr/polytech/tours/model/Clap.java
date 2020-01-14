@@ -1,6 +1,7 @@
 package fr.polytech.tours.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -11,11 +12,14 @@ public class Clap implements Versionable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Setter
     private int rollFilmId;
 
+    @Setter
     private long timeInMs;
 
     @ManyToOne
+    @Setter
     private Setup setup;
 
     @Override

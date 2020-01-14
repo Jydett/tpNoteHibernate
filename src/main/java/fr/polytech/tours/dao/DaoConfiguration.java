@@ -28,7 +28,6 @@ public class DaoConfiguration {
         daoRegistery.register(new HibernateDao<>(hibernateSession, Clap.class));
         daoRegistery.register(new HibernateDao<>(hibernateSession, ExteriorScene.class));
         daoRegistery.register(new HibernateDao<>(hibernateSession, InteriorScene.class));
-        daoRegistery.register(new HibernateDao<>(hibernateSession, Location.class));
         daoRegistery.register(new HibernateDao<>(hibernateSession, Scene.class));
         daoRegistery.register(new HibernateDao<>(hibernateSession, Setup.class));
         daoRegistery.register(new HibernateDao<>(hibernateSession, Film.class));

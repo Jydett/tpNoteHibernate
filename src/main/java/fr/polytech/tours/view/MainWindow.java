@@ -27,35 +27,13 @@ public class MainWindow extends JFrame {
         panelTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 5));
         this.add(panelTitle, BorderLayout.NORTH);
 
-//        scene = new ElementWindow<>((win, scene1) -> {
-//            if (scene1 == null) {
-//                win.removeAll();
-//            } else {
-//                win.updateField("sceneId", "Id de la scene: " + scene1.getId());
-//            }
-//        });
-//        scene.addSelectionListener(controller::selectScene);
-//        setup = new ElementWindow<>((win, setup1) -> {
-//            if (setup1 == null) {
-//                win.removeAll();
-//            } else {
-//                win.updateField("setupId", "Id du setup: " + setup1.getId());
-//            }
-//        });
-//        setup.addSelectionListener(controller::selectSetup);
-//        clap = new ElementWindow<>((win, clap1) -> {
-//            if (clap1 == null) {
-//                win.removeAll();
-//            } else {
-//                win.updateField("clapId", "Id du clap: " + clap1.getId());
-//            }
-//        });
-//        clap.addBtnDeleteClickListener(controller::deleteEntity);
-//        clap.addSelectionListener(controller::selectClap);
-
         columnsPanel = new JPanel();
         columnsPanel.setLayout(new GridLayout(1,3, 10, 0));
         this.add(columnsPanel, BorderLayout.CENTER);
+    }
+
+    public static void popup(Object message) {
+        JOptionPane.showMessageDialog(null, message, "Resultat", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void addElementColumn(ElementWindow elementWindow) {
