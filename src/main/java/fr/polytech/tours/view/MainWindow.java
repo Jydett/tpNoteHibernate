@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow(FilmController controller) {
         this.controller = controller;
-
+        this.setTitle("Application de gestion de film par Arthur & Victor");
         this.setVisible(true);
         this.setLayout(new BorderLayout());
         this.setSize(new Dimension(1200, 500));

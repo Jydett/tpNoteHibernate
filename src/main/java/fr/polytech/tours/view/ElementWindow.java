@@ -59,6 +59,7 @@ public class ElementWindow<E extends Versionable<?>> extends JPanel {
             }
         });
         delBtn.setEnabled(false);
+        addBtn.setEnabled(false);
         btnPanel.add(addBtn);
         btnPanel.add(delBtn);
         this.add(btnPanel, BorderLayout.NORTH);

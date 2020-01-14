@@ -11,12 +11,13 @@ import java.util.List;
 public class Setup implements Versionable<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
     private Integer id;
 
     @Setter
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "setup")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "setup")
     @Setter
     private List<Clap> claps;
 

@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Clap implements Versionable<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
     private Integer id;
 
     @Setter

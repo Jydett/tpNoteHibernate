@@ -4,12 +4,16 @@ import fr.polytech.tours.dao.DaoRegistery;
 import fr.polytech.tours.dao.IDao;
 import fr.polytech.tours.model.Clap;
 import fr.polytech.tours.model.Scene;
+import fr.polytech.tours.model.Setup;
 import fr.polytech.tours.model.scene.ExteriorScene;
 import fr.polytech.tours.model.scene.InteriorScene;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SceneService {
 
@@ -22,7 +26,15 @@ public class SceneService {
     }
 
     public long getTotalTime(Scene scene) {
-        return scene.getSetups().stream().flatMap(s -> s.getClaps().stream()).map(Clap::getTimeInMs).reduce(0L, Long::sum);
+        List<Setup> setups = scene.getSetups();
+        if (setups == null) return 0;
+        return setups.stream().flatMap(s -> {
+            List<Clap> claps = s.getClaps();
+            if (claps == null) {
+                return Stream.empty();
+            }
+            return claps.stream();
+        }).map(Clap::getTimeInMs).reduce(0L, Long::sum);
     }
 
     public int getLocationCode(Scene scene) throws IllegalArgumentException {

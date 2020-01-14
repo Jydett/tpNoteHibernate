@@ -24,31 +24,8 @@
         <mapping class="fr.polytech.tours.model.scene.InteriorScene"/>
         <mapping class="fr.polytech.tours.model.Scene"/>
         <mapping class="fr.polytech.tours.model.scene.ExteriorScene"/>
+        <mapping class="fr.polytech.tours.model.Location"/>
 
     </session-factory>
 
 </hibernate-configuration>
-
-<!--<?xml version='1.0' encoding='utf-8'?>-->
-<!--<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 2.0//EN"-->
-<!--        "http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">-->
-<!--<hibernate-configuration>-->
-<!--    <session-factory>-->
-<!--        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
-<!--        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;serverTimezone=UTC</property>-->
-<!--        <property name="hibernate.connection.username">root</property>-->
-<!--        <property name="hibernate.connection.password"></property>-->
-<!--        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>-->
-<!--        <property name="dialect.storage_engine">myisam</property>-->
-<!--        <property name="show_sql">true</property>-->
-<!--        <property name="hibernate.hbm2ddl.auto">create</property>-->
-
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.Film"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.Setup"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.Clap"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.Location"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.scene.InteriorScene"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.Scene"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <mapping class="fr.polytech.tours.model.scene.ExteriorScene"/>&ndash;&gt;-->
-<!--    </session-factory>-->
-<!--</hibernate-configuration>-->
