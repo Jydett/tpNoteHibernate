@@ -13,7 +13,14 @@ public class Film implements Versionable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "film")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "film")
     @Setter//FIXME to remove (test)
     private List<Scene> scenes;
+
+    private String name;
+
+    @Override//TODO faire dans un rendrerer plutot
+    public String toString() {
+        return name;
+    }
 }

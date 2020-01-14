@@ -1,21 +1,34 @@
 package fr.polytech.tours.view;
 
+import fr.polytech.tours.controller.ElementController;
+import fr.polytech.tours.model.Versionable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-public class ElementWindow<E> extends JPanel {
+public class ElementWindow<E extends Versionable<?>> extends JPanel {
 
     private final InformationWindow<E> info;
     private JScrollPane scrollPaneItem;
     private JList<E> listItem;
     private DefaultListModel<E> listModel;
+    private JButton addBtn;
+    private JButton delBtn;
+    private ElementController<?, E, ?> controller;
 
-    public ElementWindow(BiConsumer<InformationWindow<E>, E> displayer) {
+    public ElementWindow(ElementController<?, E, ?> controller, BiConsumer<InformationWindow<E>, E> displayUpdate) {
+        this.controller = controller;
         this.setLayout(new BorderLayout());
-        this.info = new InformationWindow<>(displayer);
+        this.info = new InformationWindow<E>() {
+            @Override
+            public void update(E newSelection) {
+                displayUpdate.accept(info, newSelection);
+            }
+        };
 
         listModel = new DefaultListModel<>();
 
@@ -25,6 +38,31 @@ public class ElementWindow<E> extends JPanel {
 
         this.add(info, BorderLayout.SOUTH);
         this.add(scrollPaneItem, BorderLayout.CENTER);
+        delBtn = new JButton("Supprimer");
+        addBtn = new JButton("Nouveau");
+        JPanel btnPanel = new JPanel();
+        listItem.addListSelectionListener(e -> {
+            if (! e.getValueIsAdjusting()) {
+                if (listItem.getSelectedValue() == null) {
+                    delBtn.setEnabled(false);
+                } else {
+                    controller.select(listItem.getSelectedValue());
+                    delBtn.setEnabled(true);
+                }
+            }
+        });
+        delBtn.addActionListener(l -> {
+            int selectedIndex = listItem.getSelectedIndex();
+            E selectedValue = listItem.getSelectedValue();
+            if (controller.delete(selectedValue)) {
+                listItem.remove(selectedIndex);
+                listItem.repaint();
+            }
+        });
+        delBtn.setEnabled(false);
+        btnPanel.add(addBtn);
+        btnPanel.add(delBtn);
+        this.add(btnPanel, BorderLayout.NORTH);
     }
 
     public void addElement(int index, E element){
@@ -49,16 +87,4 @@ public class ElementWindow<E> extends JPanel {
             listModel.addElement(e);
         }
     }
-
-    public void addSelectionListener(Consumer<E> listener) {
-        listItem.addListSelectionListener(e -> {
-            if (! e.getValueIsAdjusting()){
-                E selectedValue = listItem.getSelectedValue();
-                if (selectedValue != null) {
-                    listener.accept(selectedValue);
-                }
-            }
-        });
-    }
-
 }

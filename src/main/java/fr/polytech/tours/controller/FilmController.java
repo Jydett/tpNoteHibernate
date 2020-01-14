@@ -2,61 +2,66 @@ package fr.polytech.tours.controller;
 
 import fr.polytech.tours.dao.DaoRegistery;
 import fr.polytech.tours.dao.IDao;
-import fr.polytech.tours.model.Clap;
-import fr.polytech.tours.model.Film;
-import fr.polytech.tours.model.Scene;
-import fr.polytech.tours.model.Setup;
-import fr.polytech.tours.model.scene.InteriorScene;
+import fr.polytech.tours.model.*;
 import fr.polytech.tours.service.SceneService;
 import fr.polytech.tours.view.MainWindow;
 
 import javax.swing.SwingUtilities;
-import java.util.Arrays;
+import java.util.List;
 
 public class FilmController {
 
     private MainWindow view;
     private SceneService sceneService;
+    private ElementController<Integer, Film, Scene> filmController;
 
     public FilmController() {
         sceneService = SceneService.INSTANCE;
         SwingUtilities.invokeLater(() -> {
             view = new MainWindow(this);
+            init();
             IDao<Integer, Film> filmDao = DaoRegistery.getInstance().get(Film.class);
             if (filmDao.count() < 1) {
                 //TODO si pas de film alors popup + creer
             } else {
                 Film film = filmDao.get(1);
-                selectFilm(film);
+                filmController.getView().addElement(0, film);
             }
         });
     }
 
-    public void selectFilm(Film film) {
-        view.getScene().deleteElements();
-        view.getSetup().deleteElements();
-        view.getClap().deleteElements();
-        view.getScene().addElements(film.getScenes());
-    }
+    private void init() {
+        ElementController clapElement = new ElementController<Integer, Clap, Versionable<?>>(Clap.class, null) {
+            @Override
+            public List<Versionable<?>> getChildren(Clap element) {
+                return null;
+            }
+        };
+        view.addElementColumn(clapElement.getView());
 
-    public void selectScene(Scene scene) {
-        view.getSetup().deleteElements();
-        view.getClap().deleteElements();
-        view.getScene().getInfo().removeAll();
-        view.getSetup().addElements(scene.getSetups());
-        view.getScene().getInfo().update(scene);
-    }
+        ElementController setupElement = new ElementController<Integer, Setup, Clap>(Setup.class, clapElement) {
+            @Override
+            public List<Clap> getChildren(Setup element) {
+                return element.getClaps();
+            }
+        };
+        view.addElementColumn(setupElement.getView());
 
-    public void selectSetup(Setup setup) {
-        view.getClap().deleteElements();
-        view.getSetup().getInfo().removeAll();
-        view.getClap().addElements(setup.getClaps());
-        view.getSetup().getInfo().update(setup);
-    }
+        ElementController sceneElement = new ElementController<Integer, Scene, Setup>(Scene.class, setupElement) {
+            @Override
+            public List<Setup> getChildren(Scene element) {
+                return element.getSetups();
+            }
+        };
+        view.addElementColumn(sceneElement.getView());
 
-    public void selectClap(Clap clap) {
-        view.getClap().getInfo().removeAll();
-        view.getClap().getInfo().update(clap);
+        filmController = new ElementController<Integer, Film, Scene>(Film.class, sceneElement) {
+            @Override
+            public List<Scene> getChildren(Film element) {
+                return element.getScenes();
+            }
+        };
+        view.addElementColumn(filmController.getView());
     }
 
     public long getTotalTime(Scene scene) {

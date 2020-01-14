@@ -18,7 +18,7 @@ public abstract class Scene implements Versionable<Integer> {
     @ManyToOne
     private Film film;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "scene")
+    @OneToMany(  fetch = FetchType.LAZY, mappedBy = "scene")
     private List<Setup> setups;
 
     @Override

@@ -7,15 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class InformationWindow<E> extends JPanel {
+public abstract class InformationWindow<E> extends JPanel {
 
     private JLabel labelSelect;
     private JLabel itemSelect;
-    private BiConsumer<InformationWindow<E>, E> displayer;
     private Map<String, JLabel> fields;
 
-    public InformationWindow(BiConsumer<InformationWindow<E>, E> displayer) {
-        this.displayer = displayer;
+    public InformationWindow() {
         this.setLayout(new FlowLayout());
         fields = new HashMap<>();
 
@@ -30,9 +28,7 @@ public class InformationWindow<E> extends JPanel {
         return itemSelect;
     }
 
-    public void update(E newSelection) {
-        displayer.accept(this, newSelection);
-    }
+    public abstract void update(E newSelection);
 
     public void updateField(String id, String value) {
         JLabel field;

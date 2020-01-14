@@ -12,4 +12,6 @@ public interface IDao<Id extends Serializable, T extends Versionable<Id>> {
     void save(T toSave);//TOdo update plutot que save
 
     long count();
+
+    void delete(T element);
 }

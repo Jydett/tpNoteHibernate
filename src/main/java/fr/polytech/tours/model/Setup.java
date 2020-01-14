@@ -14,7 +14,7 @@ public class Setup implements Versionable<Integer> {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "setup")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "setup")
     private List<Clap> claps;
 
     @ManyToOne

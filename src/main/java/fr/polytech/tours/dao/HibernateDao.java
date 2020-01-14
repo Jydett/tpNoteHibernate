@@ -3,6 +3,7 @@ package fr.polytech.tours.dao;
 import fr.polytech.tours.model.Versionable;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import javax.persistence.Entity;
@@ -33,6 +34,13 @@ public class HibernateDao<Id extends Serializable, V extends Versionable<Id>> im
 
     public long count() {
         return (Long) hibernateSession.createQuery("select count(*) from " + persistentClass.getSimpleName()).uniqueResult();
+    }
+
+    @Override
+    public void delete(V element) {
+        Transaction transaction = hibernateSession.beginTransaction();
+        hibernateSession.remove(element);
+        transaction.commit();
     }
 
     @Override
