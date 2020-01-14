@@ -11,6 +11,12 @@ import javax.persistence.Table;
 public class InteriorScene extends Scene {
     private int theaterCode;
 
+    public static Scene id(int i) {
+        InteriorScene interiorScene = new InteriorScene();
+        interiorScene.id = i;
+        return interiorScene;
+    }
+
     @Override
     public String toString() {
         return super.toString() + ", interior";

@@ -55,8 +55,7 @@ public class ElementWindow<E extends Versionable<?>> extends JPanel {
             int selectedIndex = listItem.getSelectedIndex();
             E selectedValue = listItem.getSelectedValue();
             if (controller.delete(selectedValue)) {
-                listItem.remove(selectedIndex);
-                listItem.repaint();
+                listModel.remove(selectedIndex);
             }
         });
         delBtn.setEnabled(false);

@@ -11,14 +11,14 @@ import java.util.List;
 public abstract class Scene implements Versionable<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
     private String description;
 
     @ManyToOne
     private Film film;
 
-    @OneToMany(  fetch = FetchType.LAZY, mappedBy = "scene")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "scene")
     private List<Setup> setups;
 
     @Override

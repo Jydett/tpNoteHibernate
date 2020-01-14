@@ -4,6 +4,7 @@ import fr.polytech.tours.model.*;
 import fr.polytech.tours.model.scene.ExteriorScene;
 import fr.polytech.tours.model.scene.InteriorScene;
 import org.hibernate.Session;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -20,8 +21,7 @@ public class DaoConfiguration {
     }
 
     private void createSession() {
-        EntityManager entityManager = Persistence.createEntityManagerFactory("test").createEntityManager();
-        hibernateSession = entityManager.unwrap(Session.class);
+        hibernateSession = new Configuration().configure().buildSessionFactory().openSession();
     }
 
     private void registerDaos() {

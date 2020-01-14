@@ -1,5 +1,6 @@
 package fr.polytech.tours.controller;
 
+import fr.polytech.tours.Mock;
 import fr.polytech.tours.dao.DaoRegistery;
 import fr.polytech.tours.dao.IDao;
 import fr.polytech.tours.model.*;
@@ -21,12 +22,14 @@ public class FilmController {
             view = new MainWindow(this);
             init();
             IDao<Integer, Film> filmDao = DaoRegistery.getInstance().get(Film.class);
-            if (filmDao.count() < 1) {
+            long count = filmDao.count();
+            System.out.println("Il y a " + count + " films");
+            if (count < 1) {
                 //TODO si pas de film alors popup + creer
-            } else {
-                Film film = filmDao.get(1);
-                filmController.getView().addElement(0, film);
+                Mock.fillBase();
             }
+            Film film = filmDao.get(1);
+            filmController.getView().addElement(0, film);
         });
     }
 

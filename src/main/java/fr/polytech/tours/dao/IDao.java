@@ -9,7 +9,7 @@ public interface IDao<Id extends Serializable, T extends Versionable<Id>> {
 
     T get(Id id);
 
-    void save(T toSave);//TOdo update plutot que save
+    void save(T toSave);
 
     long count();
 

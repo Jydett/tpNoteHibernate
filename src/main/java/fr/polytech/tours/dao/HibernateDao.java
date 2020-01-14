@@ -21,7 +21,9 @@ public class HibernateDao<Id extends Serializable, V extends Versionable<Id>> im
     }
 
     public void save(V o) {
-        hibernateSession.saveOrUpdate(o);
+        Transaction transaction = hibernateSession.beginTransaction();
+        hibernateSession.save(o);
+        transaction.commit();
     }
 
     public V get(Id id) {
