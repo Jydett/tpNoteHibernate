@@ -1,6 +1,7 @@
 package fr.polytech.tours.controller;
 
 import fr.polytech.tours.dao.DaoRegistery;
+import fr.polytech.tours.dao.IDao;
 import fr.polytech.tours.model.Clap;
 import fr.polytech.tours.model.Film;
 import fr.polytech.tours.model.Scene;
@@ -21,18 +22,26 @@ public class FilmController {
         sceneService = SceneService.INSTANCE;
         SwingUtilities.invokeLater(() -> {
             view = new MainWindow(this);
-            Film film = DaoRegistery.getInstance().get(Film.class).get(1);
-            selectFilm(film);
+            IDao<Integer, Film> filmDao = DaoRegistery.getInstance().get(Film.class);
+            if (filmDao.count() < 1) {
+                //TODO si pas de film alors popup + creer
+            } else {
+                Film film = filmDao.get(1);
+                selectFilm(film);
+            }
         });
     }
 
     public void selectFilm(Film film) {
         view.getScene().deleteElements();
+        view.getSetup().deleteElements();
+        view.getClap().deleteElements();
         view.getScene().addElements(film.getScenes());
     }
 
     public void selectScene(Scene scene) {
         view.getSetup().deleteElements();
+        view.getClap().deleteElements();
         view.getScene().getInfo().removeAll();
         view.getSetup().addElements(scene.getSetups());
         view.getScene().getInfo().update(scene);

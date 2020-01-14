@@ -3,8 +3,11 @@ package fr.polytech.tours.dao;
 import fr.polytech.tours.model.Versionable;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.List;
 
 public class HibernateDao<Id extends Serializable, V extends Versionable<Id>> implements IDao<Id, V> {
 
@@ -26,6 +29,10 @@ public class HibernateDao<Id extends Serializable, V extends Versionable<Id>> im
             throw new ObjectNotFoundException(persistentClass, id.toString());
         }
         return res;
+    }
+
+    public long count() {
+        return (Long) hibernateSession.createQuery("select count(*) from " + persistentClass.getSimpleName()).uniqueResult();
     }
 
     @Override
